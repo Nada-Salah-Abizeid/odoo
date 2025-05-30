@@ -1,0 +1,9 @@
+<odoo>
+
+  <record id="patien_action" model="ir.actions.act_window">
+    <field name="name">Patients</field>
+    <field name="res_model">hms.patient</field>
+  </record>
+ <menuitem id="hms_patient_menu" name="Patient" parent="hms_root_menu" action="patien_action"/>
+
+</odoo>
