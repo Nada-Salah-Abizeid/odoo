@@ -1,0 +1,38 @@
+<odoo>
+    <record id="view_tree_doctor" model="ir.ui.view">
+        <field name="name">hms.doctor.tree</field>
+        <field name="model">hms.doctor</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="department_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_form_doctor" model="ir.ui.view">
+        <field name="name">hms.doctor.form</field>
+        <field name="model">hms.doctor</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="first_name"/>
+                        <field name="last_name"/>
+                        <field name="department_id"/>
+                        <field name="patient_ids"/>
+<!--                        <field name="doctor_ids"  widget="many2many_tags"   readonly="department_id == 'False'"/>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="doctor_action" model="ir.actions.act_window">
+        <field name="name">Doctors</field>
+        <field name="res_model">hms.doctor</field>
+    </record>
+
+    <menuitem id="hms_doctor_menu" name="Doctors" parent="hms_root_menu" action="doctor_action"/>
+</odoo>

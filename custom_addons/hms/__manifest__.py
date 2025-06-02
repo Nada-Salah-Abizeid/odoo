@@ -8,8 +8,9 @@
     'depends': ['base'],
     'data': [
         'views/base_menus.xml',
-        'views/hms_patient_views.xml'
-        # 'security/ir.model.access.csv',
+        'views/hms_patient_views.xml',
+        'views/hms_doctor_views.xml',
+        'views/hms_department_views.xml',
+        'views/hms_crm_views.xml'
     ],
 }
-

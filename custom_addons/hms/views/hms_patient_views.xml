@@ -1,9 +1,78 @@
 <odoo>
 
-  <record id="patien_action" model="ir.actions.act_window">
-    <field name="name">Patients</field>
-    <field name="res_model">hms.patient</field>
-  </record>
- <menuitem id="hms_patient_menu" name="Patient" parent="hms_root_menu" action="patien_action"/>
+    <record id="view_tree_patient" model="ir.ui.view">
+        <field name="name">hms.patient.tree</field>
+        <field name="model">hms.patient</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="first_name"/>
+                <field name="state"/>
+                <field name="department_capacity" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="patient_action" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">hms.patient</field>
+    </record>
+
+    <record id="view_form_patient" model="ir.ui.view">
+        <field name="name">hms.patient.form</field>
+        <field name="model">hms.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="create_patient_log" type="object" string="Create Log"/>
+                    <field name="state" widget="statusbar" options="{'clickable':'1'}"/>
+                </header>
+                <sheet>
+                    <notebook>
+                        <page string="Basic Info">
+                            <group>
+                                <field name="first_name"/>
+                                <field name="last_name"/>
+                                <field name="birth_date"/>
+                                <field name="blood_type"/>
+                                <field name="cr_ratio"/>
+                                <field name="pcr"/>
+                                <field name="email" />
+                                <field name="image"/>
+                                <field name="address"/>
+                                <field name="age" invisible="1"/>
+                                <field name="history" invisible="age &lt; 50"/>
+                            </group>
+                        </page>
+                        <page string="Patient Logs">
+                            <group>
+                                <field name="patient_logs">
+                                    <tree>
+                                        <field name="description"/>
+                                        <field name="create_date"/>
+                                        <field name="create_uid"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Doctors">
+                            <group>
+                                <field name="department_id"/>
+                                <field name="doctor_ids" domain="[('department_id', '=', department_id)]"/>
+                            </group>
+                        </page>
+                        <page string="Department">
+                            <group>
+                                <field name="department_id"/>
+                                <field name="department_capacity"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <menuitem id="hms_patient_menu" name="Patients" parent="hms_root_menu" action="patient_action"/>
 
 </odoo>
